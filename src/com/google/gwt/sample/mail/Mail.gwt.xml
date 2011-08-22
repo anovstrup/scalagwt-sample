@@ -14,6 +14,7 @@
 
 <module rename-to="mail">
   <inherits name='com.google.gwt.user.User' />
+  <inherits name="ScalaLibrary"/>
 
   <!-- This will give us shorter obfuscated CSS class names. We guarantee
        that there will be no class names that will conflict with /M.+/ -->
