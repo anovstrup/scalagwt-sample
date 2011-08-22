@@ -32,12 +32,12 @@ import com.google.gwt.user.client.ui.Widget
 object AboutDialog {
   private val binder: AboutDialog.Binder = GWT.create(classOf[AboutDialog.Binder])
 
-  private[client] trait Binder extends UiBinder[Widget, AboutDialog]
+  protected[AboutDialog] trait Binder extends UiBinder[Widget, AboutDialog]
 }
 
 class AboutDialog extends DialogBox {
 
-  @UiField private[client] var closeButton: Button = null
+  @UiField protected[AboutDialog] var closeButton: Button = null
 
   // Use this opportunity to set the dialog's caption.
   setText("About the Mail Sample")
@@ -63,6 +63,6 @@ class AboutDialog extends DialogBox {
   }
 
   @UiHandler(Array("closeButton"))
-  private[client] def onSignOutClicked(event: ClickEvent) = hide()
+  protected[AboutDialog] def onSignOutClicked(event: ClickEvent) = hide()
 }
 

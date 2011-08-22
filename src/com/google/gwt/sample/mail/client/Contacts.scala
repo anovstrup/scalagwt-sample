@@ -43,17 +43,17 @@ object Contacts {
   /**
    * A simple popup that displays a contact's information.
    */
-  private[client] object ContactPopup {
+  protected[Contacts] object ContactPopup {
     private val binder: Binder = GWT.create(classOf[Binder])
 
     @UiTemplate("ContactPopup.ui.xml")
-    private[client] trait Binder extends UiBinder[Widget, Contacts.ContactPopup]
+    protected[ContactPopup] trait Binder extends UiBinder[Widget, Contacts.ContactPopup]
   }
 
   /**
    * A simple popup that displays a contact's information.
    */
-  private[client] class ContactPopup(contact: Contacts.Contact)
+  protected[Contacts] class ContactPopup(contact: Contacts.Contact)
   // The popup's constructor's argument is a boolean specifying that it
   // auto-close itself when the user clicks outside of it.
       extends PopupPanel(true) {
@@ -62,13 +62,13 @@ object Contacts {
     nameDiv.setInnerText(contact.name)
     emailDiv.setInnerText(contact.email)
 
-    @UiField private[client] var nameDiv: Element = null
-    @UiField private[client] var emailDiv: Element = null
+    @UiField protected[ContactPopup] var nameDiv: Element = null
+    @UiField protected[ContactPopup] var emailDiv: Element = null
   }
 
 
-  private[client] trait Binder extends UiBinder[Widget, Contacts]
-  private[client] trait Style extends CssResource {
+  protected[Contacts] trait Binder extends UiBinder[Widget, Contacts]
+  protected[Contacts] trait Style extends CssResource {
     def item: String
   }
 
@@ -87,8 +87,8 @@ class Contacts extends Composite {
     new Contacts.Contact("Alan Turing", "alan@example.com"),
     new Contacts.Contact("John von Neumann", "john@example.com"))
 
-  @UiField private[client] var panel: ComplexPanel = null
-  @UiField private[client] var style: Contacts.Style = null
+  @UiField protected[Contacts] var panel: ComplexPanel = null
+  @UiField protected[Contacts] var style: Contacts.Style = null
 
   initWidget(Contacts.binder.createAndBindUi(this))
   contacts foreach addContact

@@ -35,11 +35,11 @@ import com.google.gwt.resources.client.ClientBundle.Source
  * populating its components with hard-coded data.
  */
 object Mail {
-  private[client] trait Binder extends UiBinder[DockLayoutPanel, Mail]
+  protected[Mail] trait Binder extends UiBinder[DockLayoutPanel, Mail]
 
   private val binder: Binder = GWT.create(classOf[Mail.Binder])
 
-  private[client] trait GlobalResources extends ClientBundle {
+  protected[Mail] trait GlobalResources extends ClientBundle {
     @NotStrict
     @Source(Array("global.css"))
     def css: CssResource
@@ -54,10 +54,10 @@ object Mail {
  */
 class Mail extends EntryPoint {
 
-  @UiField private[client] var topPanel: TopPanel = null
-  @UiField private[client] var mailList: MailList = null
-  @UiField private[client] var mailDetail: MailDetail = null
-  @UiField private[client] var shortcuts: Shortcuts = null
+  @UiField protected[Mail] var topPanel: TopPanel = null
+  @UiField protected[Mail] var mailList: MailList = null
+  @UiField protected[Mail] var mailDetail: MailDetail = null
+  @UiField protected[Mail] var shortcuts: Shortcuts = null
 
   /**
    * This method constructs the application user interface by instantiating
