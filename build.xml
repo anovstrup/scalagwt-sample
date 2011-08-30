@@ -11,6 +11,11 @@
     </fileset>
   </path>
 
+  <path id="jetty.plugin.classpath">
+    <fileset dir="lib/jetty" includes="*.jar"/>
+  </path>
+  <taskdef classpathref="jetty.plugin.classpath" resource="tasks.properties" loaderref="jetty.loader" />
+
   <path id="project.class.path">
     <pathelement location="war/WEB-INF/classes"/>
     <pathelement location="lib/scala/scala-library-jribble.jar"/>
@@ -28,6 +33,7 @@
   <target name="libs" description="Copy libs to WEB-INF/lib">
     <mkdir dir="war/WEB-INF/lib" />
     <copy todir="war/WEB-INF/lib" file="lib/gwt/gwt-servlet.jar" />
+    <copy todir="war/WEB-INF/lib" file="lib/scala/scala-library-gwt.jar" />
   </target>
 
   <target name="gwtc" depends="scalac" description="GWT compile to JavaScript">
@@ -114,6 +120,12 @@
 
   <target name="war" depends="build" description="Create a war file">
     <zip destfile="Hello.war" basedir="war"/>
+  </target>
+
+  <target name="jetty.run">
+    <jetty tempDirectory="jetty-temp">
+      <webApp name="gwtdlx" warfile="war" contextpath="/gwtdlx" />
+    </jetty>
   </target>
 
   <target name="clean" description="Cleans this project">
