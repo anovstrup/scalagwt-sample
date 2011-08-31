@@ -97,21 +97,10 @@ class GwtDlx extends EntryPoint {
          if (str.length == 1 && Character.isDigit(str(0))) str(0) - '0'
          else 0
       }
-      api.solveSudoku(board, new Callback)
-   }
 
-   private def createCell: TextBox = {
-     val cell = new TextBox()
-     cell.setMaxLength(1)
-     cell.setStyleName("cell")
-     cell
-   }
-
-   private def getBox(r: Int, c: Int): TextBox = grid.getWidget(r, c).asInstanceOf[TextBox]
-
-   private class Callback extends AsyncCallback[Array[Array[Int]]] {
-      def onFailure(caught: Throwable) = {}
-      def onSuccess(result: Array[Array[Int]]) = {
+      import Async._
+      async {
+         val result = callAsync[Array[Array[Int]]](api.solveSudoku(board, _))
          ajax.setVisible(false)
          if (result == null) {
             noSolution.setVisible(true)
@@ -126,5 +115,14 @@ class GwtDlx extends EntryPoint {
          }
       }
    }
+
+   private def createCell: TextBox = {
+     val cell = new TextBox()
+     cell.setMaxLength(1)
+     cell.setStyleName("cell")
+     cell
+   }
+
+   private def getBox(r: Int, c: Int): TextBox = grid.getWidget(r, c).asInstanceOf[TextBox]
 }
 

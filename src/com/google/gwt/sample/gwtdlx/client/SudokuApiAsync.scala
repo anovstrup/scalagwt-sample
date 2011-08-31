@@ -18,6 +18,8 @@ package com.google.gwt.sample.gwtdlx.client
 import com.google.gwt.user.client.rpc.AsyncCallback
 
 trait SudokuApiAsync {
-   def solveSudoku(board: Array[Array[Int]], callback: AsyncCallback[Array[Array[Int]]]): Unit
+   type Board = Array[Array[Int]]
+
+   def solveSudoku(board: Board, callback: AsyncCallback[Board]): Unit
 }
 
